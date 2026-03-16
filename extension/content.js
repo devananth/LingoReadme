@@ -24,7 +24,6 @@
       const totalStartTime = performance.now();
 
       btn.innerText = "⏳ Translating...";
-      btn.disabled = true;
 
       try {
         const pathParts = window.location.pathname.split("/").filter(Boolean);
@@ -69,7 +68,11 @@
           const html = marked.parse(result.translatedMarkdown);
           document.querySelector(".markdown-body").innerHTML = html;
           btn.innerText = "✅ Translated";
-          btn.disabled = true;
+          btn.style.backgroundColor = "#dafbe1"; // Light green background
+          btn.style.color = "#1a7f37"; // Dark green text
+          btn.style.borderColor = "#1a7f37";
+          btn.disabled = true; // Keep it disabled!
+          btn.style.cursor = "default";
           // CALCULATE TOTAL TIME
           //   const totalEndTime = performance.now();
           //   const totalDuration = (
@@ -86,7 +89,8 @@
       } catch (err) {
         console.error("Translation Client Error:", err);
         alert("Error: " + err.message);
-        btn.innerText = "❌ Error";
+        btn.innerText = "❌ Try Again";
+        btn.disabled = false;
       } finally {
         btn.disabled = false;
         setTimeout(() => {

@@ -40,29 +40,35 @@ const LOCALE_MAP = {
 
 document.addEventListener("DOMContentLoaded", () => {
   const langSelect = document.getElementById("langSelect");
+  const statusMsg = document.getElementById("statusMsg");
 
   chrome.storage.local.get(["targetLang"], (result) => {
+    console.log("Storage check - result found:", result);
     if (result.targetLang) {
       langSelect.value = result.targetLang;
-      console.log("Loaded saved language:", result.targetLang);
+
+      console.log("Setting dropdown to saved value:", result.targetLang);
+
+      if (langSelect.value !== result.targetLang) {
+        langSelect.value = "es";
+      }
     } else {
       // Default to Spanish if nothing is selected
-      langSelect.value = "es-ES";
+      console.log("No value found in storage, defaulting to 'es'");
+      langSelect.value = "es";
+      chrome.storage.local.set({ targetLang: "es" });
     }
   });
 
   langSelect.addEventListener("change", () => {
     const selectedLang = LOCALE_MAP[langSelect.value];
-
-    chrome.storage.local.set({ targetLang: selectedLang }, () => {
-      console.log("Language auto-saved:", selectedLang);
-
-      const status = document.createElement("span");
-      status.textContent = " ✅ Saved";
-      status.style.fontSize = "10px";
-      status.style.color = "green";
-      langSelect.after(status);
-      setTimeout(() => status.remove(), 1000);
+    chrome.storage.local.set({ targetLang: selectedLang.substr(0, 2) }, () => {
+      statusMsg.innerText = "✅ Preference updated!";
+      statusMsg.style.color = "#1a7f37";
+      setTimeout(() => {
+        statusMsg.innerText = "Preference saved automatically";
+        statusMsg.style.color = "#57606a";
+      }, 2000);
     });
   });
 });
