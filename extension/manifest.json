@@ -6,7 +6,7 @@
   "host_permissions": [
     "https://github.com/*",
     "https://raw.githubusercontent.com/*",
-    "http://localhost:3000/*"
+    "https://lingoreadme.onrender.com/*"
   ],
   "action": {
     "default_popup": "popup.html"
