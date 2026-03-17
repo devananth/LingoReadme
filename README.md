@@ -13,6 +13,11 @@ Open-source software powers the world, but it has a massive barrier to entry: **
 * **Friction in Collaboration:** Developers waste time copying and pasting text chunk-by-chunk into external translators just to understand how to install a library or contribute to a project.
 * **Our Solution:** GitLocalize fetches the raw `.md` file, translates it using the context-aware Lingo.dev AI engine, and safely renders it back to the screen—ensuring that code snippets, terminal commands, and technical jargon remain perfectly intact.
 
+## 🎥 Demo
+
+[![Watch the demo](https://img.youtube.com/vi/H2K9IT2te4s/0.jpg)](https://www.youtube.com/watch?v=H2K9IT2te4s)
+
+
 ## 🛠 Tech Stack
 * **Frontend (Extension):** JavaScript (Manifest V3), HTML/CSS, Chrome Storage API, `marked.js` (for Markdown-to-HTML rendering).
 * **Backend (API):** Node.js, Express.js, CORS.
